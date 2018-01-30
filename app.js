@@ -8,3 +8,31 @@
 // Create a /redirect route that sends you to /surprise with a moved permanently status code
 // Create a route that returns the current date. You will need to look up how to get the current date.
 
+var express = require ('express');
+var app = express();
+
+app.get('/', function (request, response) {
+  response.send("Hello World"); 
+});
+// app.listen(process.env.PORT);
+
+// app.get('/name', function (request, response){
+//     var name = "Candice B. Brown";
+//     response.send(name);
+// });
+
+app.get('/surprise', function(request, response){
+    response.send("SURPRISE!!!");
+});
+
+app.get('/name', function(request, response){
+    response.redirect(301, '/surprise');
+});
+
+app.get('/date', function(request, response){
+    var date = new Date();
+    response.send(date);
+});
+
+app.listen(process.env.PORT);
+
