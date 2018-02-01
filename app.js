@@ -16,10 +16,10 @@ app.get('/', function (request, response) {
 });
 // app.listen(process.env.PORT);
 
-// app.get('/name', function (request, response){
-//     var name = "Candice B. Brown";
-//     response.send(name);
-// });
+app.get('/name', function (request, response){
+    var name = "Candice B. Brown";
+    response.send(name);
+});
 
 app.get('/surprise', function(request, response){
     response.send("SURPRISE!!!");
@@ -34,5 +34,26 @@ app.get('/date', function(request, response){
     response.send(date);
 });
 
+//for Express Level 2
+
+app.get('/cities', function(request, response){
+    var cities = ['New York City', 'Toronto', 'San Diego', 'Providence', 'Boston'];
+    response.json(cities);
+});
+
+// app.get('/index', function(request, response){
+//   response.json(cities);
+// });
+
+// app.get('/', function(request, response){
+//   response.send("Hello World");
+// //   response.sendFile(__dirname + "/index.html");
+// });
+
+app.use(express.static('public/'));
+
 app.listen(process.env.PORT);
+
+
+
 
