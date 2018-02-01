@@ -11,30 +11,30 @@
 var express = require ('express');
 var app = express();
 
-app.get('/', function (request, response) {
-  response.send("Hello World"); 
-});
-// app.listen(process.env.PORT);
+// app.get('/', function (request, response) {
+//   response.send("Hello World"); 
+// });
+// // app.listen(process.env.PORT);
 
-app.get('/name', function (request, response){
-    var name = "Candice B. Brown";
-    response.send(name);
-});
+// app.get('/name', function (request, response){
+//     var name = "Candice B. Brown";
+//     response.send(name);
+// });
 
-app.get('/surprise', function(request, response){
-    response.send("SURPRISE!!!");
-});
+// app.get('/surprise', function(request, response){
+//     response.send("SURPRISE!!!");
+// });
 
-app.get('/name', function(request, response){
-    response.redirect(301, '/surprise');
-});
+// app.get('/name', function(request, response){
+//     response.redirect(301, '/surprise');
+// });
 
-app.get('/date', function(request, response){
-    var date = new Date();
-    response.send(date);
-});
+// app.get('/date', function(request, response){
+//     var date = new Date();
+//     response.send(date);
+// });
 
-//for Express Level 2
+// //for Express Level 2
 
 app.get('/cities', function(request, response){
     var cities = ['New York City', 'Toronto', 'San Diego', 'Providence', 'Boston'];
