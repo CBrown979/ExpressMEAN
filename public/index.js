@@ -1,15 +1,17 @@
 /* global $ */
-$(document).ready(function() {
 
-$(function(){
-   $.get('/cities', appendToCities);
-   
-   function appendToCities(cities) {
-       var myCities = [];
-       for( var i in cities) {
-           myCities.push($('<option>', { text: cities[i] }));
-       }
-       $('.cityList').append(myCities);
-    }
-  });
+$(document).ready(function() {
+console.log('start');
+    $(function(){
+       $.get('/cities', appendToCities);
+       
+       function appendToCities(cities) {
+           var myCities = [];
+           for(var i in cities) {
+               console.log("hi");
+               myCities.push($('<option>', { text: cities[i] }));
+           }
+           $('#cityList').append(myCities);
+        }
+      });
 });
