@@ -4,12 +4,15 @@ var app = express();
 
 app.get('/cities', function(request, response){
     var cities = ['New York City', 'Toronto', 'San Diego', 'Providence', 'Boston'];
-    if (request.query.limit >= 0){
+    if (request.query.limit == 0){
+      response.json(cities);
+    }
+    if (request.query.limit >= 0 || request.query.limit === cities.length){
       response.json(cities.slice(0, request.query.limit));
       console.log('Hi');
     }
     else {
-      response.json(cities);
+      response.write("Invalid Request");
     }
     // if(request.query.limit >0){
     //   response.json(cities.slice(0, request.query.limit));
