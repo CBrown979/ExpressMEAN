@@ -1,5 +1,5 @@
 //CodeSchool Express Level 4 
-//run in browser: https://careerdevs-cbrown2017-cbrown979.c9users.io/cities?limit=0
+//example of old run in browser: https://careerdevs-cbrown2017-cbrown979.c9users.io/cities?limit=0
 
 //copied from app.js file one level up -- html was reading wrong file
 var express = require ('express');
