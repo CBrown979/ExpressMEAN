@@ -1,0 +1,3 @@
+[submodule "ExpressMEAN"]
+	path = ExpressMEAN
+	url = git@github.com:CBrown979/ExpressMEAN.git
