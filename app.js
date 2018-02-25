@@ -1,13 +1,5 @@
-//CodeSchool Express Level 1
+//CodeSchool Express Level 4
 //run in browser: https://careerdevs-cbrown2017-cbrown979.c9users.io/cities?limit=0
-
-// Create a simple express node app meeting the following requirements
-// Requirements
-// Create an express app.
-// Create a root route that returns “Hello World”
-// Create a ‘/name’ route that returns your name
-// Create a /redirect route that sends you to /surprise with a moved permanently status code
-// Create a route that returns the current date. You will need to look up how to get the current date.
 
 var express = require ('express');
 var app = express();
@@ -61,14 +53,38 @@ var app = express();
 // });
 //above: non-dynamic, but fully working code
 
-//DYNAMIC Routes below
+//DYNAMIC Routes below from Level 3
+// var cities = {
+//     'Flushing': 'New York',
+//     'Charlotte': 'North Carolina',
+//     'Boston': 'Massachusetts',
+//     'Toronto': 'Canada',
+//     'Providence': 'Rhode Island',
+// };
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({ extended: false});
+
+//Cities Object For Level 4 below:
 var cities = {
-    'Flushing': 'New York',
-    'Charlotte': 'North Carolina',
-    'Boston': 'Massachusetts',
-    'Toronto': 'Canada',
-    'Providence': 'Rhode Island',
+    'Flushing': 'NY', 
+    'Charlotte': 'NC',
+    'San Diego': 'CA',
+    'Seattle': 'WA',
+    'Boston': 'MA',
+    'Providence': 'RI'
 };
+
+app.post('/cities', parseUrlencoded, function(request, response){
+    if(request.body.newCity.length >=4 && request.body.newCity.state.length >=2){
+        var createCity;
+        var newCity = createCity[request.body.name, request.body.state];
+        cities[newCity.name] = newCity.state;
+        response.status(201).json(newCity.name);
+    }
+    else {
+        response.status(400).json("Invalid Request");
+    }
+});
 
 app.get('/cities', function(request, response){
     var city = Object.keys(cities); //Object.keys() returns an array whose elements are strings corresponding to the enumerable properties found directly upon object.
