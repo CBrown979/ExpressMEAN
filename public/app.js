@@ -1,84 +1,89 @@
-//CodeSchool Express Level 4 
+//CodeSchool Express Level 5 
 //example of old run in browser: https://careerdevs-cbrown2017-cbrown979.c9users.io/cities?limit=0
 
-//copied from app.js file one level up -- html was reading wrong file
 var express = require ('express');
 var app = express();
 
-var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({ extended: false});
-
-//Cities Object For Level 4 below:
-var cities = {
-    'Flushing': 'NY', 
-    'Charlotte': 'NC',
-    'San Diego': 'CA',
-    'Seattle': 'WA',
-    'Boston': 'MA',
-    'Providence': 'RI'
-};
-
-app.post('/cities', parseUrlencoded, function(request, response){
-    if(request.body.newCity.length >=4 && request.body.newCity.state.length >=2){
-        var createCity;
-        var newCity = createCity[request.body.name, request.body.state];
-        cities[newCity.name] = newCity.state;
-        response.status(201).json(newCity.name);
-    }
-    else {
-        response.status(400).json("Invalid Request");
-    }
-});
-
-app.get('/cities', function(request, response){
-    var city = Object.keys(cities); //Object.keys() returns an array whose elements are strings corresponding to the enumerable properties found directly upon object.
-    if (request.query.limit == 0){
-        response.json(city);
-    }
-    else if (request.query.limit <= city.length){
-        response.json(city.slice(0, request.query.limit));
-    }
-    else {
-        response.status(400).json("Exceeded City Limits");
-    }
-});
-
-// //Dynamic Routes II
-// //Whenever we use our name parameter we want to parse it a specific way. 
-// //Let's clean up our existing code so that all routes with a name parameter get the same special handling.
-// //Call app.param() to intercept requests that contain an argument called 'name'. 
-// //Remember app.param() takes a callback function as its second argument, which uses the same signature as a middleware.
-// //Inside the app.param() callback function, call the parseCityName() function with the submitted name parameter. 
-// //Set the return value to a new property in the request object called cityName.
-// //Finally, call a function that moves processing to the next function in the stack.
-
-app.param('name', function(request, response, next){
-    var name = request.params.name;
-    var city = name[0].toUpperCase() + name.slice(1).toLowerCase();
-    request.cityName = city;
-    next();
-});
-
-app.get('/cities/:name', function(request, response){
-    var stateName = cities[request.cityName];
-    if(!stateName){
-        response.status(404).json("Not Found");
-    }
-    else{
-        response.json(stateName);
-    }
-});
-
-// app.get('/index', function(request, response){
-//   response.json(cities);
-// });
-
-// app.get('/', function(request, response){
-//   response.send("Hello World");
-// //   response.sendFile(__dirname + "/index.html");
-// });
-
 app.use(express.static('public/'));
+
+var cities = require('./routes.cities');
+app.use('/cities', cities);
+
+
+
+// var bodyParser = require('body-parser');
+// var parseUrlencoded = bodyParser.urlencoded({ extended: false});
+
+// //Cities Object For Level 4 below:
+// var cities = {
+//     'Flushing': 'NY', 
+//     'Charlotte': 'NC',
+//     'San Diego': 'CA',
+//     'Seattle': 'WA',
+//     'Boston': 'MA',
+//     'Providence': 'RI'
+// };
+
+// app.post('/cities', parseUrlencoded, function(request, response){
+//     if(request.body.newCity.length >=4 && request.body.newCity.state.length >=2){
+//         var createCity;
+//         var newCity = createCity[request.body.name, request.body.state];
+//         cities[newCity.name] = newCity.state;
+//         response.status(201).json(newCity.name);
+//     }
+//     else {
+//         response.status(400).json("Invalid Request");
+//     }
+// });
+
+// app.get('/cities', function(request, response){
+//     var city = Object.keys(cities); //Object.keys() returns an array whose elements are strings corresponding to the enumerable properties found directly upon object.
+//     if (request.query.limit == 0){
+//         response.json(city);
+//     }
+//     else if (request.query.limit <= city.length){
+//         response.json(city.slice(0, request.query.limit));
+//     }
+//     else {
+//         response.status(400).json("Exceeded City Limits");
+//     }
+// });
+
+// // //Dynamic Routes II
+// // //Whenever we use our name parameter we want to parse it a specific way. 
+// // //Let's clean up our existing code so that all routes with a name parameter get the same special handling.
+// // //Call app.param() to intercept requests that contain an argument called 'name'. 
+// // //Remember app.param() takes a callback function as its second argument, which uses the same signature as a middleware.
+// // //Inside the app.param() callback function, call the parseCityName() function with the submitted name parameter. 
+// // //Set the return value to a new property in the request object called cityName.
+// // //Finally, call a function that moves processing to the next function in the stack.
+
+// app.param('name', function(request, response, next){
+//     var name = request.params.name;
+//     var city = name[0].toUpperCase() + name.slice(1).toLowerCase();
+//     request.cityName = city;
+//     next();
+// });
+
+// app.get('/cities/:name', function(request, response){
+//     var stateName = cities[request.cityName];
+//     if(!stateName){
+//         response.status(404).json("Not Found");
+//     }
+//     else{
+//         response.json(stateName);
+//     }
+// });
+
+// // app.get('/index', function(request, response){
+// //   response.json(cities);
+// // });
+
+// // app.get('/', function(request, response){
+// //   response.send("Hello World");
+// // //   response.sendFile(__dirname + "/index.html");
+// // });
+
 
 app.listen(process.env.PORT);
 
